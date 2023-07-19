@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  form.form-group.bg-danger-subtle.p-4.border.border-primary.rounded.d-flex.flex-column(method="POST" action="")
+    h2.text-gray-900.font-semibold Create an account
+    label(for="firstName") First Name
+    input#firstName.form-control.border.border-primary.rounded(name="firstName" placeholder="First Name" type="text")
+    label(for="lastName") Last Name
+    input#lastName.form-control.border.border-primary.rounded(name="lastName" placeholder="Last Name" type="text")
+    label(for="username") Username
+    input#username.form-control.border.border-primary.rounded(name="username" placeholder="Username" type="text")
+    label(for="password") Password
+    input#password.form-control.border.border-primary.rounded(name="password" placeholder="Password" type="password")
+    button.btn.btn-success.mt-2 Sign Up
+  if errors
+   ul
+    for error in errors
+     li!= error.msg
+  a(href='/log-in') Already have an account? Log in

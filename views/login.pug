@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  form.form-group.bg-danger-subtle.p-4.border.border-primary.rounded.d-flex.flex-column.align-items-center(method="POST" action="")
+    h2.text-gray-900.font-semibold Login to your account
+    input#username.form-control.border.border-primary.rounded.m-2(name="username" placeholder="Username" type="text")
+    input#password.form-control.border.border-primary.rounded.m-2(name="password" placeholder="Password" type="password")
+    button.btn.btn-primary.m-2 Log In
+  a.btn.btn-warning.m-2(href='/sign-up') Sign up
+  

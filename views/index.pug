@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1= title
+  p.h6 Welcome #{currentUser.firstName}
+  h5 Our users
+  div
+   each user,index in users
+    if user.status === "Member"
+     span.text-success #[strong #[em #{user.username}]]#{ (index< users.length -1) ? ",": ""} 
+    else if user.status === "Admin"
+     span.text-warning #[strong #[em #{user.username}]]#{ (index< users.length -1) ? ",": ""} 
+    else
+     span #{user.username}#{ (index< users.length -1) ? ",": ""}
+  div.container
+   form.form-group.p-2.border.border-primary.rounded.d-flex.flex-column.align-items-center(method="POST" action="/new_post",style="background-color:#d8d7be")
+    div.input-group.input-group-sm.m-2.border.border-primary.rounded
+     span.input-group-text Title 
+     input#title.form-control(name="title",type="text")
+    div.input-group.input-group-sm.m-2.border.border-primary.rounded
+     span.input-group-text Text 
+     textarea#message.form-control(name="message",type="text")
+    button.btn.btn-primary(style="align-self:flex-end") Post
+   if errors
+    ul
+     for error in errors
+      li!= error.msg
+   if posts.length>0
+    div.container.border.border-primary.rounded.mt-2(style='background-color:#E0C57F')
+     each post in posts
+      div.container.post
+       h2.hr-lines!= post.title 
+       p!= post.message
+       if userStatus !== "Unverified"
+        p(style="text-align:right") Message by #[em #{post.user.username}]
+        p(style="text-align:right") #[em #{post.post_time_formatted}]
+       if userStatus === "Admin"
+        form.mb-1(method="post" action="")
+         input(type="hidden",id="postId",name="postId",value=post._id)
+         button.btn.btn-danger Delete Post
+   else 
+    h4 There are no posts
+
+  

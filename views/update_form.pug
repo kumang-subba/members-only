@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p.h6 Welcome #{currentUser.firstName}
+  form.form-group.bg-danger-subtle.p-4.border.border-primary.rounded.d-flex.flex-column.align-items-center(method="POST" action="")
+    h2.text-gray-900.font-semibold Enter the secret code for membership
+    input#code.form-control.border.border-primary.rounded.m-2(name="code" placeholder="Code" type="password")
+    button.btn.btn-primary.m-2(type="submit") Enter the club
+  if errors
+   ul
+    for error in errors
+     li!= error.msg
